@@ -1,20 +1,23 @@
 - name: deploy catalogue binary
   get_url:
     url: "{{ catalogue.bin }}"
-    xxx:
-    xxx:
+    dest: /opt/catalogue
+    mode: 0755
   notify: restart catalogue service
 
 - name: copy supervisord script for catalogue
   template:
-    src:
-    dest:
-    mode:
+    src: catalogue.supervisor.conf.j2
+    dest: /etc/supervisor/conf.d/catalogue.conf
+    mode: 0755
   notify: restart supervisor
 
+#to immediately restart supervisor and not at the end so that the frontend app
+#application functions
 - meta: flush_handlers
 
 - name: start frontend service
+  #name comes from the jinja2 template
   supervisorctl:
-    xxx:
-    xxx: 
+    name: catalogue
+    state: started

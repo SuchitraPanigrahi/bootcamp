@@ -42,7 +42,7 @@ services:
        - "7081:80"
     networks:
       custom:
-        ipv4_address: 192.168.61.12
+        ipv4_address: 192.168.61.13
     dns: 8.8.8.8
     domainname: codespaces.io
     hostname: catalogue
@@ -65,7 +65,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: admin123
   jenkins:
-    image: schoolofdevops/jenkins
+    image: jenkins/jenkins:lts
     ports:
       - "8080:8080"
     volumes:
